@@ -1,7 +1,7 @@
 grunt-smushit
 =============
 
-NOTE: There is a bug inside node-smushit, I opened a [issue]:https://github.com/colorhook/node-smushit/issues/1 to the author and I'm trying to fix it too. Sorry!
+NOTE: There is a bug inside node-smushit. I opened a issue https://github.com/colorhook/node-smushit/issues/1 to the author and I'm trying to fix it too. Sorry!
 
 [Grunt][grunt] task to remove unecessary bytes of PNG and JPG, it uses [node-smushit][node-smushit] module and 
 
@@ -55,4 +55,5 @@ MIT License
 [node-smushit]: https://github.com/colorhook/node-smushit
 [getting_started]: https://github.com/cowboy/grunt/blob/master/docs/getting_started.md
 
-based on [grunt-recess][grunt-recess]
+based on:
+[grunt-recess][grunt-recess]
