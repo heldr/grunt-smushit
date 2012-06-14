@@ -1,7 +1,7 @@
 grunt-smushit
 =============
 
-NOTE: There is a bug inside node-smushit. I opened an issue https://github.com/colorhook/node-smushit/issues/1 to the author and I'm trying to fix it too. Sorry!
+NOTE: It's not integrated at all with node-smushit. I opened an issue https://github.com/colorhook/node-smushit/issues/1 to the author and I'm trying to fix it too. Sorry!
 
 [Grunt][grunt] task to remove unecessary bytes of PNG and JPG, it uses [node-smushit][node-smushit] 
 
