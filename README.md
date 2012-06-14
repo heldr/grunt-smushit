@@ -7,7 +7,7 @@ NOTE: There is a bug inside node-smushit. I opened a issue https://github.com/co
 
 > Smush.it uses optimization techniques specific to image format to remove unnecessary bytes from image files. It is a "lossless" tool, which means it optimizes the images without changing their look or visual quality.
 
-[Read more]: http://www.smushit.com/ysmush.it/
+[Read more about Smush.it][smushit-site]
 
 ## Getting Started
 
@@ -57,3 +57,4 @@ based on: [grunt-recess][grunt-recess]
 [node-smushit]: https://github.com/colorhook/node-smushit
 [getting_started]: https://github.com/cowboy/grunt/blob/master/docs/getting_started.md
 [grunt-recess]: https://github.com/sindresorhus/grunt-recess
+[smushit-site]: http://www.smushit.com/ysmush.it/
