@@ -5,7 +5,7 @@ NOTE: There is a bug inside node-smushit. I opened a issue https://github.com/co
 
 [Grunt][grunt] task to remove unecessary bytes of PNG and JPG, it uses [node-smushit][node-smushit] 
 
-> Smush.it uses optimization techniques specific to image format to remove unnecessary bytes from image files. It is a "lossless" tool, which means it optimizes the images without changing their look or visual quality. After Smush.it runs on a web page it reports how many bytes would be saved by optimizing the page's images and provides a downloadable zip file with the minimized image files.
+> Smush.it uses optimization techniques specific to image format to remove unnecessary bytes from image files. It is a "lossless" tool, which means it optimizes the images without changing their look or visual quality.
 
 [Read more]: http://www.smushit.com/ysmush.it/
 
