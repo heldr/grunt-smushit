@@ -38,7 +38,7 @@ smushit: {
 }
 ```
 
-### Only one image
+### With just a image
 
 ```js
 smushit: {
