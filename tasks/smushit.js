@@ -20,7 +20,25 @@ module.exports = function( grunt ) {
         }
 
         if(files.length) {
-            smushit.smushit(files);
+            var completed = 0,
+                done = this.async(),
+                asyncTask = function() {
+                    if(completed == 1){
+                        done(true);
+                    } else {
+                        setTimeout(asyncTask,1000);
+                    }
+                };
+
+            smushit.smushit(files,{
+                recursive:true,
+                onComplete: function(reports){
+                    completed = 1;
+                }
+            });
+
+            asyncTask();
+
         } else {
             grunt.fail.fatal('Image not found, please check if you put the right path.');
         }
