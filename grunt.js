@@ -5,7 +5,11 @@ module.exports = function( grunt ) {
         smushit:{
             specific:['tests/img/logo.png','tests/img/tellme.jpg'],
             path:'tests/img',
-            only:'tests/img/logo.png'
+            only:'tests/img/logo.png',
+            destination:{
+                src:['tests/img/logo.png'],
+                dest:'tests/img/min/logo.png'
+            }
         },
         lint: {
             files: [
@@ -40,6 +44,6 @@ module.exports = function( grunt ) {
 
     grunt.loadTasks('tasks');
 
-    grunt.registerTask( 'default', 'smushit:specific smushit:path smushit:only lint' );
+    grunt.registerTask( 'default', 'smushit:specific smushit:path smushit:only smushit:destination lint' );
 
 };
