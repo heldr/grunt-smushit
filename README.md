@@ -18,29 +18,31 @@ grunt.loadNpmTasks('grunt-smushit');
 ```
 
 ## Documentation
-There are 3 ways to use grunt-smushit:
-
-### Recursive path
+There are 4 ways to use grunt-smushit:
 
 ```js
-smushit: {
-	dist: 'public/images'
-}
-```
+smushit:{
 
-### Image list
+	//with output folder
+    destination:{
+        src:['tests/img/logo.png'],
+        dest:'tests/img/min'
+    },
 
-```js
-smushit: {
-	dist: ['public/images/img1.png','public/images/img2.png']
-}
-```
+	//replace image by image
+    specific: {
+        src:['tests/img/logo.png','tests/img/tellme.jpg']
+    },
 
-### With just a image
+    //replace recursive
+    path: {
+        src:'tests/img'  
+    },
 
-```js
-smushit: {
-	dist: 'public/images/img1.png'
+    //replace only one image
+    only: {
+        src:'tests/img/logo.png'
+    }
 }
 ```
 

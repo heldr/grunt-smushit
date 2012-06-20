@@ -1,6 +1,6 @@
 {
 	"name": "grunt-smushit",
-	"version": "0.1.2",
+	"version": "0.2",
 	"description": "Grunt task to compress image",
 	"keywords": [
 		"smushit",
