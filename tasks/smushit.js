@@ -14,7 +14,7 @@ module.exports = function( grunt ) {
             path = require( 'path' ),
             logError = grunt.fail.fatal,
             task = this,
-            files = task.file.src || (function(){logError('your smushit task now requires the src: attribute like almost grunt tasks, look the examples at https://github.com/heldr/grunt-smushit');})(),
+            files = task.file.src || logError('your smushit task now requires the src: attribute like almost grunt tasks, look the examples at https://github.com/heldr/grunt-smushit'),
             copyFile = grunt.file.copy;
 
         task.asyncHandler = function() {
