@@ -1,6 +1,6 @@
 {
 	"name": "grunt-smushit",
-	"version": "0.2.1",
+	"version": "0.3.0",
 	"description": "Grunt task to compress image",
 	"keywords": [
 		"smushit",
@@ -26,8 +26,8 @@
 		"url": "git://github.com/heldr/grunt-smushit.git"
 	},
 	"dependencies": {
-		"grunt": "~0.3.10",
-		"node-smushit": "~0.2.0"
+		"grunt": ">=0.3.0",
+		"node-smushit": "~0.3.0"
 	},
 	"engines": {
 		"node": ">=0.6.0"

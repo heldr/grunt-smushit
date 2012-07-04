@@ -9,11 +9,15 @@ module.exports = function( grunt ) {
             path: {
                 src:'tests/img'
             },
-            only: {
+            single: {
                 src:'tests/img/logo.png'
             },
-            destination:{
+            output:{
                 src:['tests/img/logo.png'],
+                dest:'tests/img/min'
+            },
+            outputPath:{
+                src:'tests/img',
                 dest:'tests/img/min'
             }
         },
@@ -50,6 +54,6 @@ module.exports = function( grunt ) {
 
     grunt.loadTasks('tasks');
 
-    grunt.registerTask( 'default', 'smushit:specific smushit:path smushit:only smushit:destination lint' );
+    grunt.registerTask( 'default', 'smushit:specific smushit:path smushit:single smushit:output smushit:outputPath lint' );
 
 };

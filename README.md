@@ -23,9 +23,15 @@ There are 4 ways to use grunt-smushit:
 ```js
 smushit:{
 
-	//with output folder
+    //with source path and output folder
     destination:{
-        src:['tests/img/logo.png'],
+        src:'tests/img',
+        dest:'tests/img/min'
+    },
+
+	//with source images and output folder
+    destination1:{
+        src:['tests/img/logo.png','tests/img/whatever.png'],
         dest:'tests/img/min'
     },
 

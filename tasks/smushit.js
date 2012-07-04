@@ -3,7 +3,7 @@
  * https://github.com/heldr/grunt-smushit
  *
  * Copyright (c) 2012 Helder Santana
- * heldr.com
+ * http://heldr.com
  * MIT License
  */
 module.exports = function( grunt ) {
@@ -14,8 +14,19 @@ module.exports = function( grunt ) {
             path = require( 'path' ),
             logError = grunt.fail.fatal,
             task = this,
-            files = task.file.src || logError('your smushit task now requires the src: attribute like almost grunt tasks, look the examples at https://github.com/heldr/grunt-smushit'),
-            copyFile = grunt.file.copy;
+            source = task.file.src || logError('your smushit task now requires the src: attribute like almost grunt tasks, look the examples at https://github.com/heldr/grunt-smushit'),
+            copyFile = grunt.file.copy,
+            files = [];
+
+        if( grunt.utils.kindOf( source ) === 'string' && !/\.(png|gif|jp(e)?g)$/i.test(source) ) {
+            grunt.file.recurse(source,function(abspath){
+                if(abspath){
+                    files.push(abspath);
+                }
+            });
+        } else {
+            files = grunt.file.expandFiles(source);
+        }
 
         task.asyncHandler = function() {
 
@@ -29,63 +40,61 @@ module.exports = function( grunt ) {
 
         };
 
-        task.callSmushit = function( files ) {
+        task.callSmushit = function( files, output ) {
+
+            var smushit_settings = {
+                recursive: true,
+                onItemComplete: function( response ) {
+                    if ( output ) {
+                        grunt.log.writeln( '[grunt-smushit] New optimized file: ' + output );
+                    }
+                },
+                onComplete: function( response ) {
+                    task.isCompleted = 1;
+                }
+            };
 
             task.isCompleted = 0;
 
-            smushit.smushit( files, {
-                recursive: true,
-                onComplete: function( reports ) {
-                    task.isCompleted = 1;
-                }
-            });
+            if (output) {
+                smushit_settings.output = output;
+            }
+
+            smushit.smushit( files, smushit_settings );
 
             task.asyncHandler();
 
         };
 
 
-        var destination = function() {
+        var destination = function( files, output ) {
 
-            var dest = task.file.dest;
+            var outputFile = '';
 
-            if ( /\.(png|gif|jp(e)?g)$/i.test(dest) ) {
-                logError('SmushIt destination must be a folder');
-            } else if ( !/\/$/.test(dest) ) {
-                dest += '/';
+            if ( !/\/$/.test(output) ) {
+                output += '/';
             }
 
-            if( grunt.utils.kindOf( files ) === 'array' ) {
-
-                var i = 0,
-                    fileTarget = '';
-
-                files.forEach( function( fileName ) {
-                    fileTarget = dest + path.basename(fileName);
-
-                    grunt.log.writeln( '[Copying file] ' + fileName + ' to ' + fileTarget);
-                    copyFile( fileName, fileTarget );
-
-                    if( i === files.length - 1 ) {
-                        task.callSmushit( dest );
-                    }
-
-                    i++;
-                });
-
-            } else {
-
-                copyFile( files, dest );
-                task.callSmushit( dest );
-
+            if ( grunt.file.expandDirs( output ).length === 0 ) {
+                grunt.file.mkdir( output );
             }
+
+            files.forEach( function( fileName ) {
+
+                outputFile = output + path.basename(fileName);
+
+                if(fileName !== outputFile){
+                    task.callSmushit( fileName, outputFile);
+                }
+
+            });
 
         };
 
         if( files.length ) {
 
             if( typeof task.file.dest !== 'undefined' ) {
-                destination();
+                destination( files, task.file.dest );
             } else {
                 task.callSmushit( files );
             }
