@@ -45,8 +45,8 @@ smushit:{
         src:'tests/img'  
     },
 
-    //replace only one image
-    only: {
+    //replace single image
+    single: {
         src:'tests/img/logo.png'
     }
 }
