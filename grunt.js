@@ -54,6 +54,6 @@ module.exports = function( grunt ) {
 
     grunt.loadTasks('tasks');
 
-    grunt.registerTask( 'default', 'smushit:specific smushit:path smushit:single smushit:output smushit:outputPath lint' );
+    grunt.registerTask( 'default', 'lint smushit' );
 
 };
