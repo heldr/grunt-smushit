@@ -1,7 +1,7 @@
 grunt-smushit
 =============
 
-[Grunt][grunt] task to remove unecessary bytes of PNG and JPG, it uses [node-smushit][node-smushit] 
+[Grunt][grunt] task to remove unecessary bytes of PNG and JPG, it uses [node-smushit][node-smushit]
 
 > Smush.it uses optimization techniques specific to image format to remove unnecessary bytes from image files. It is a "lossless" tool, which means it optimizes the images without changing their look or visual quality.
 
@@ -42,7 +42,7 @@ smushit:{
 
     //replace recursive
     path: {
-        src:'tests/img'  
+        src:'tests/img'
     },
 
     //replace single image

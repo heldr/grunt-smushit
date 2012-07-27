@@ -28,19 +28,7 @@ module.exports = function( grunt ) {
             files = grunt.file.expandFiles(source);
         }
 
-        task.asyncHandler = function() {
-
-            var done = task.async();
-
-            if( task.isCompleted === 1 ) {
-                done( true );
-            } else {
-                setTimeout( task.asyncHandler, 1000 );
-            }
-
-        };
-
-        task.callSmushit = function( files, output ) {
+        task.callSmushit = function( done, files, output ) {
 
             var smushit_settings = {
                 recursive: true,
@@ -48,9 +36,16 @@ module.exports = function( grunt ) {
                     if ( output ) {
                         grunt.log.writeln( '[grunt-smushit] New optimized file: ' + output );
                     }
+                    if ( done && task.hasOutput ) {
+                        done( true );
+                    }
                 },
                 onComplete: function( response ) {
                     task.isCompleted = 1;
+
+                    if (done && !task.hasOutput ) {
+                        done( true );
+                    }
                 }
             };
 
@@ -62,14 +57,13 @@ module.exports = function( grunt ) {
 
             smushit.smushit( files, smushit_settings );
 
-            task.asyncHandler();
-
         };
 
 
         var destination = function( files, output ) {
 
-            var outputFile = '';
+            var outputFile = ''
+                done;
 
             if ( !/\/$/.test(output) ) {
                 output += '/';
@@ -80,11 +74,11 @@ module.exports = function( grunt ) {
             }
 
             files.forEach( function( fileName ) {
-
                 outputFile = output + path.basename(fileName);
 
-                if(fileName !== outputFile){
-                    task.callSmushit( fileName, outputFile);
+                if(fileName !== outputFile) {
+                    done = task.async();
+                    task.callSmushit( done, fileName, outputFile );
                 }
 
             });
@@ -94,9 +88,11 @@ module.exports = function( grunt ) {
         if( files.length ) {
 
             if( typeof task.file.dest !== 'undefined' ) {
+                task.hasOutput = true;
                 destination( files, task.file.dest );
             } else {
-                task.callSmushit( files );
+                var done = task.async();
+                task.callSmushit( done, files );
             }
 
         } else {
