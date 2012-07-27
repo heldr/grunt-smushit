@@ -62,7 +62,7 @@ module.exports = function( grunt ) {
 
         var destination = function( files, output ) {
 
-            var outputFile = ''
+            var outputFile = '',
                 done;
 
             if ( !/\/$/.test(output) ) {
