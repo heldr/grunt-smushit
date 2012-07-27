@@ -41,15 +41,11 @@ module.exports = function( grunt ) {
                     }
                 },
                 onComplete: function( response ) {
-                    task.isCompleted = 1;
-
                     if (done && !task.hasOutput ) {
                         done( true );
                     }
                 }
             };
-
-            task.isCompleted = 0;
 
             if (output) {
                 smushit_settings.output = output;
