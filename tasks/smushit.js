@@ -33,15 +33,13 @@ module.exports = function( grunt ) {
             var smushit_settings = {
                 recursive: true,
                 onItemComplete: function( response ) {
+                    task.filesSmashed++;
                     if ( output ) {
                         grunt.log.writeln( '[grunt-smushit] New optimized file: ' + output );
                     }
-                    if ( done && task.hasOutput ) {
-                        done( true );
-                    }
                 },
                 onComplete: function( response ) {
-                    if (done && !task.hasOutput ) {
+                    if ( task.filesToSmash === task.filesSmashed ) {
                         done( true );
                     }
                 }
@@ -56,10 +54,9 @@ module.exports = function( grunt ) {
         };
 
 
-        var destination = function( files, output ) {
+        var destination = function( done, files, output ) {
 
-            var outputFile = '',
-                done;
+            var outputFile = '';
 
             if ( !/\/$/.test(output) ) {
                 output += '/';
@@ -73,7 +70,6 @@ module.exports = function( grunt ) {
                 outputFile = output + path.basename(fileName);
 
                 if(fileName !== outputFile) {
-                    done = task.async();
                     task.callSmushit( done, fileName, outputFile );
                 }
 
@@ -83,12 +79,14 @@ module.exports = function( grunt ) {
 
         if( files.length ) {
 
+            var done = task.async();
+            task.filesToSmash = files.length;
+            task.filesSmashed = 0;
+
             if( typeof task.file.dest !== 'undefined' ) {
-                task.hasOutput = true;
-                destination( files, task.file.dest );
+                destination( done, files, task.file.dest );
             } else {
-                var done = task.async();
-                task.callSmushit( done, files );
+                task.callSmushit( done, files, false );
             }
 
         } else {
