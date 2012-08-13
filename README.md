@@ -29,15 +29,26 @@ smushit:{
         dest:'tests/img/min'
     },
 
-	//with source images and output folder
+    //with source images and output folder
     destination1:{
         src:['tests/img/logo.png','tests/img/whatever.png'],
         dest:'tests/img/min'
     },
 
-	//replace image by image
+    // recursive extension filter with output folder
+    destination2: {
+        src: ['tests/img/**/*.png'],
+        dest:'tests/img/min'
+    },
+
+    //replace images
     specific: {
         src:['tests/img/logo.png','tests/img/tellme.jpg']
+    },
+
+    //replace by extension
+    specificExtension: {
+        src:['tests/img/**/*.png']
     },
 
     //replace recursive
