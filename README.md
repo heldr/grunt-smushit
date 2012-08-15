@@ -23,10 +23,10 @@ There are 4 ways to use grunt-smushit:
 ```js
 smushit:{
 
-    //with source path and output folder
+    // with output folder (should not be inside source path)
     destination:{
         src:'tests/img',
-        dest:'tests/img/min'
+        dest:'tests/opt_img'
     },
 
     //with source images and output folder

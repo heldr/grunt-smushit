@@ -11,21 +11,27 @@ module.exports = function( grunt ) {
 
     grunt.registerMultiTask( 'smushit', 'remove unnecessary bytes from image files', function() {
         var smushit = require( 'node-smushit' ),
+            wrench = require('wrench'),
+            colors = require('colors'),
             path = require( 'path' ),
+            fs = require('fs'),
             logError = grunt.fail.fatal,
             task = this,
             source = task.file.src || logError('your smushit task now requires the src: attribute like almost grunt tasks, look the examples at https://github.com/heldr/grunt-smushit'),
             copyFile = grunt.file.copy,
-            files = [];
+            files = [],
+            dest = task.file.dest || null;
 
         if( grunt.utils.kindOf( source ) === 'string' && !/\.(png|gif|jp(e)?g)$/i.test(source) ) {
-            grunt.file.recurse(source,function(abspath){
-                if(abspath){
-                    files.push(abspath);
-                }
+            files = wrench.readdirSyncRecursive(source).filter(function (filename) {
+                return fs.statSync(source + '/' +  filename).isFile();
             });
+
+        } else if ( grunt.utils.kindOf( source ) === 'array') {
+            files = source;
         } else {
-            files = grunt.file.expandFiles(source);
+            grunt.log.writeln('invalid src format'.red);
+            process.exit();
         }
 
         task.callSmushit = function( done, files, output ) {
@@ -35,7 +41,7 @@ module.exports = function( grunt ) {
                 onItemComplete: function( response ) {
                     task.filesSmashed++;
                     if ( output ) {
-                        grunt.log.writeln( '[grunt-smushit] New optimized file: ' + output );
+                        grunt.log.writeln( '[grunt-smushit] New optimized file: ' + output.blue );
                     }
                 },
                 onComplete: function( response ) {
@@ -56,21 +62,34 @@ module.exports = function( grunt ) {
 
         var destination = function( done, files, output ) {
 
-            var outputFile = '';
+            var outputFile = '' , sourceFile = '';
 
             if ( !/\/$/.test(output) ) {
                 output += '/';
             }
 
-            if ( grunt.file.expandDirs( output ).length === 0 ) {
-                grunt.file.mkdir( output );
+            if ( !/\/$/.test(source) ) {
+                source += '/';
             }
 
+            console.log(files);
+
             files.forEach( function( fileName ) {
-                outputFile = output + path.basename(fileName);
+
+
+                console.log(fileName);
+                console.log(output);
+                console.log(source);
+
+                outputFile = output + fileName;
+                sourceFile = source + fileName;
+
+                process.exit();
+
+                wrench.mkdirSyncRecursive( path.dirname(outputFile) );
 
                 if(fileName !== outputFile) {
-                    task.callSmushit( done, fileName, outputFile );
+                    task.callSmushit( done, sourceFile, outputFile );
                 }
 
             });
@@ -83,8 +102,8 @@ module.exports = function( grunt ) {
             task.filesToSmash = files.length;
             task.filesSmashed = 0;
 
-            if( typeof task.file.dest !== 'undefined' ) {
-                destination( done, files, task.file.dest );
+            if( typeof dest !== 'undefined' ) {
+                destination( done, files, dest );
             } else {
                 task.callSmushit( done, files, false );
             }
