@@ -4,7 +4,7 @@ module.exports = function( grunt ) {
     grunt.initConfig({
         smushit:{
             specific: {
-                src:['tests/img/logo.png','tests/img/tellme.jpg']
+                src:['tests/img/logo.png']
             },
             path: {
                 src:'tests/img'
