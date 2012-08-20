@@ -10,7 +10,10 @@ module.exports = function( grunt ) {
     'use strict';
 
     function _hasImageExtension( str ) {
-        return /\.(png|gif|jp(e)?g)$/i.test( str );
+
+        var pattern = /\.(png|gif|jp(e)?g)$/i;
+        return pattern.test( str );
+
     }
 
     grunt.registerMultiTask( 'smushit', 'remove unnecessary bytes from image files', function() {
