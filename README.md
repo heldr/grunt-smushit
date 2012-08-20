@@ -18,7 +18,7 @@ grunt.loadNpmTasks('grunt-smushit');
 ```
 
 ## Documentation
-There are 4 ways to use grunt-smushit:
+There are many ways to use grunt-smushit:
 
 ```js
 smushit:{
