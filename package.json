@@ -10,7 +10,8 @@
 		"image optimizer",
 		"compress image",
 		"image",
-		"web performance"
+		"web performance",
+		"grunt plugin"
 	],
 	"homepage": "https://github.com/heldr/grunt-smushit",
 	"bugs": "https://github.com/heldr/grunt-smushit/issues",
