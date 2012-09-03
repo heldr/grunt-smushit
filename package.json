@@ -1,6 +1,6 @@
 {
 	"name": "grunt-smushit",
-	"version": "0.3.4",
+	"version": "0.3.5",
 	"description": "Grunt task to compress image",
 	"keywords": [
 		"smushit",
@@ -11,7 +11,7 @@
 		"compress image",
 		"image",
 		"web performance",
-		"grunt plugin"
+		"gruntplugin"
 	],
 	"homepage": "https://github.com/heldr/grunt-smushit",
 	"bugs": "https://github.com/heldr/grunt-smushit/issues",
