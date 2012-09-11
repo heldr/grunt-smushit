@@ -115,7 +115,7 @@ module.exports = function( grunt ) {
             action( done , files , dest );
 
         } else {
-            logError('Image not found, please check if you put the right path.');
+            // logError('Image not found, please check if you put the right path.');
         }
     });
 
