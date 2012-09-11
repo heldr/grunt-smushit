@@ -114,9 +114,8 @@ module.exports = function( grunt ) {
             action = (dest) ? destination : task.callSmushit;
             action( done , files , dest );
 
-        } else {
-            // logError('Image not found, please check if you put the right path.');
         }
+
     });
 
 };
