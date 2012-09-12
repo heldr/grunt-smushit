@@ -12,9 +12,9 @@ module.exports = function( grunt ) {
             single: {
                 src:'tests/img/logo.png'
             },
-            output:{
+            output: {
                 src:['tests/img/logo.png','tests/img/brand/logo.png'],
-                dest:'tests/img/opt_img'
+                dest:'tests/opt_img'
             },
             outputPath:{
                 src:'tests/img',

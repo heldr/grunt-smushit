@@ -1,7 +1,7 @@
 {
 	"name": "grunt-smushit",
-	"version": "0.3.6",
-	"description": "Grunt task to compress image",
+	"version": "0.3.7",
+	"description": "A Grunt task to remove unecessary bytes of PNG and JPG using Yahoo Smushit",
 	"keywords": [
 		"smushit",
 		"png",

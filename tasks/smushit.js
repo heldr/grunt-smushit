@@ -6,6 +6,7 @@
  * http://heldr.com
  * MIT License
  */
+
 module.exports = function( grunt ) {
     'use strict';
 
@@ -17,16 +18,16 @@ module.exports = function( grunt ) {
     }
 
     grunt.registerMultiTask( 'smushit', 'remove unnecessary bytes from image files', function() {
-        var smushit = require( 'node-smushit' ),
-            wrench = require('wrench'),
-            path = require( 'path' ),
-            fs = require('fs'),
+        var smushit  = require( 'node-smushit' ),
+            wrench   = require('wrench'),
+            path     = require( 'path' ),
+            fs       = require('fs'),
             logError = grunt.fail.fatal,
-            task = this,
-            source = task.file.src,
+            task     = this,
+            source   = task.file.src,
             copyFile = grunt.file.copy,
-            files = [],
-            dest = task.file.dest;
+            files    = [],
+            dest     = task.file.dest;
 
         if( dest && grunt.utils.kindOf( source ) === 'string' && !_hasImageExtension( source ) ) {
             files = wrench.readdirSyncRecursive(source).filter(function (filename) {
@@ -65,7 +66,6 @@ module.exports = function( grunt ) {
 
         var destination = function( done, files, output ) {
 
-            var outputFile = '' , sourceFile = '', followHierarchy;
 
             if ( !/\/$/.test(output) ) {
                 output += '/';
@@ -73,34 +73,48 @@ module.exports = function( grunt ) {
 
             if ( !_hasImageExtension( source ) ) {
 
-                followHierarchy = true;
+                var outputFiles = [], fullPath, exists = fs.existsSync || path.existsSync;
 
-                if ( !/\/$/.test( source )  ) {
-                    source += '/';
+                if ( !/\/$/.test(output) ) {
+                    output += '/';
                 }
-            }
 
-            files.forEach( function( fileName ) {
+                //wrench.mkdirSyncRecursive( source );
+                grunt.log.writeln( '[grunt-smushit] Copying images from ' + source + ' to ' + output );
 
-                if ( followHierarchy ) {
+                if( !exists( source ) ) {
+                    grunt.file.mkdir( source );
+                }
 
-                    outputFile = output + fileName;
-                    sourceFile = source + fileName;
+                wrench.copyDirSyncRecursive( source , output );
 
-                } else {
+                wrench.readdirSyncRecursive(output).filter(function (filename) {
+                    fullPath = output + filename;
+                    if(fs.statSync( fullPath ).isFile()) {
+                        outputFiles.push(fullPath);
+                    }
+                });
+
+                task.callSmushit( done , outputFiles );
+
+            } else {
+
+                var outputFile = '' , sourceFile = '';
+
+                files.forEach( function( fileName ) {
 
                     outputFile = output + path.basename(fileName);
                     sourceFile = fileName;
 
-                }
+                    wrench.mkdirSyncRecursive( path.dirname(outputFile) );
 
-                wrench.mkdirSyncRecursive( path.dirname(outputFile) );
+                    if(fileName !== outputFile) {
+                        task.callSmushit( done, sourceFile, outputFile );
+                    }
 
-                if(fileName !== outputFile) {
-                    task.callSmushit( done, sourceFile, outputFile );
-                }
+                });
 
-            });
+            }
 
         };
 
