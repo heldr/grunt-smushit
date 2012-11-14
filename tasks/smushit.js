@@ -29,7 +29,7 @@ module.exports = function( grunt ) {
             files    = [],
             dest     = task.file.dest;
 
-        if( dest && grunt.utils.kindOf( source ) === 'string' && !_hasImageExtension( source ) ) {
+        if( dest && typeof source === 'string' && !_hasImageExtension( source ) ) {
             files = wrench.readdirSyncRecursive(source).filter(function (filename) {
                 return fs.statSync(source + '/' +  filename).isFile();
             });
