@@ -24,10 +24,10 @@ module.exports = function( grunt ) {
             fs       = require('fs'),
             logError = grunt.fail.fatal,
             task     = this,
-            source   = task.filesSrc || task.file.src,
+            source   = task.filesSrc || task.files.src,
             copyFile = grunt.file.copy,
             files    = [],
-            dest     = task.filesDest || task.file.dest;
+            dest     = task.filesDest || task.files.dest;
 
         if( dest && typeof source === 'string' && !_hasImageExtension( source ) ) {
             files = wrench.readdirSyncRecursive(source).filter(function (filename) {
