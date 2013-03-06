@@ -69,13 +69,11 @@ module.exports = function( grunt ) {
         };
 
 
-        var destination = function( done, files, output ) {
-
+        var targetPath = function( done, files, output ) {
 
             if ( !/\/$/.test(output) ) {
                 output += '/';
             }
-
 
             source.forEach(function(fileName) {
 
@@ -88,10 +86,6 @@ module.exports = function( grunt ) {
                     if ( !_hasImageExtension( fileName ) ) {
 
                         var outputFiles = [], fullPath;
-
-                        if ( !/\/$/.test(output) ) {
-                            output += '/';
-                        }
 
                         grunt.log.writeln( '[grunt-smushit] Copying images from ' + fileName + ' to ' + output );
 
@@ -136,7 +130,7 @@ module.exports = function( grunt ) {
             task.filesToSmash = files.length;
             task.filesSmashed = 0;
 
-            action = (dest) ? destination : task.callSmushit;
+            action = (dest) ? targetPath : task.callSmushit;
             action( done , files , dest );
 
         }
