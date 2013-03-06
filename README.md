@@ -1,7 +1,7 @@
 grunt-smushit
 =============
 
-[Grunt][grunt] task to remove unecessary bytes of PNG and JPG, it uses [node-smushit][node-smushit]
+A [Grunt][grunt] task to remove unecessary bytes of PNG and JPG, it uses [node-smushit][node-smushit]
 
 > Smush.it uses optimization techniques specific to image format to remove unnecessary bytes from image files. It is a "lossless" tool, which means it optimizes the images without changing their look or visual quality.
 
@@ -70,8 +70,8 @@ MIT License
 
 based on: [grunt-recess][grunt-recess]
 
-[grunt]: https://github.com/cowboy/grunt
+[grunt]: http://gruntjs.com
 [node-smushit]: https://github.com/colorhook/node-smushit
-[getting_started]: https://github.com/cowboy/grunt/blob/master/docs/getting_started.md
+[getting_started]: http://gruntjs.com/getting-started
 [grunt-recess]: https://github.com/sindresorhus/grunt-recess
 [smushit-site]: http://www.smushit.com/ysmush.it/
