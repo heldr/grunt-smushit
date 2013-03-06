@@ -9,7 +9,7 @@ A [Grunt][grunt] task to remove unecessary bytes of PNG and JPG, it uses [node-s
 
 ## Getting Started
 
-Install this grunt plugin next to your project's [grunt.js gruntfile][getting_started] with: `npm install grunt-smushit`
+Install this grunt plugin next to your project's [Gruntfile.js][getting_started] with: `npm install grunt-smushit`
 
 Then add this line to your project's `grunt.js` gruntfile:
 
