@@ -1,6 +1,6 @@
 {
   "name": "grunt-smushit",
-  "version": "0.3.10",
+  "version": "0.4",
   "description": "A Grunt task to remove unecessary bytes of PNG and JPG using Yahoo Smushit",
   "keywords": [
     "smushit",
@@ -30,7 +30,7 @@
     "url": "https://github.com/helder/grunt-smushit/issues"
   },
   "dependencies": {
-    "node-smushit": ">=0.3.0",
+    "node-smushit": ">=0.5.0",
     "wrench": "*"
   },
   "engines": {
