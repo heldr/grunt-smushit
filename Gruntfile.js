@@ -21,17 +21,11 @@ module.exports = function( grunt ) {
                 dest:'tests/opt_img'
             }
         },
-        lint: {
+        jshint: {
             files: [
                 'grunt.js',
                 'tasks/**/*.js'
-            ]
-        },
-        watch: {
-            files: '<config:lint.files>',
-            tasks: 'default'
-        },
-        jshint: {
+            ],
             options: {
                 es5: true,
                 esnext: true,
@@ -53,7 +47,9 @@ module.exports = function( grunt ) {
     });
 
     grunt.loadTasks('tasks');
+    // Load the plugin that provides the "uglify" task.
+    grunt.loadNpmTasks('grunt-contrib-jshint');
 
-    grunt.registerTask( 'default', 'lint smushit' );
+    grunt.registerTask( 'default', ['jshint','smushit'] );
 
 };
