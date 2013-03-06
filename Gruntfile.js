@@ -3,15 +3,6 @@ module.exports = function( grunt ) {
 
     grunt.initConfig({
         smushit:{
-            specific: {
-                src:['tests/img/logo.png']
-            },
-            path: {
-                src:'tests/img'
-            },
-            single: {
-                src:'tests/img/logo.png'
-            },
             output: {
                 src:['tests/img/logo.png','tests/img/brand/logo.png'],
                 dest:'tests/opt_img'
@@ -19,6 +10,15 @@ module.exports = function( grunt ) {
             outputPath:{
                 src:'tests/img',
                 dest:'tests/opt_img'
+            },
+            specific: {
+                src:['tests/img/logo.png']
+            },
+            single: {
+                src:'tests/img/logo.png'
+            },
+            path: {
+                src:'tests/img'
             }
         },
         jshint: {

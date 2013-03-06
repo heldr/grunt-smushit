@@ -24,10 +24,15 @@ module.exports = function( grunt ) {
             fs       = require('fs'),
             logError = grunt.fail.fatal,
             task     = this,
-            source   = task.filesSrc || task.files.src,
             copyFile = grunt.file.copy,
             files    = [],
-            dest     = task.filesDest || task.files.dest;
+            dest, source;
+
+        this.files.forEach(function(f) {
+
+            source = f.src;
+            dest = f.dest;
+        });
 
         if( dest && typeof source === 'string' && !_hasImageExtension( source ) ) {
             files = wrench.readdirSyncRecursive(source).filter(function (filename) {
@@ -71,50 +76,56 @@ module.exports = function( grunt ) {
                 output += '/';
             }
 
-            if ( !_hasImageExtension( source ) ) {
 
-                var outputFiles = [], fullPath, exists = fs.existsSync || path.existsSync;
+            source.forEach(function(fileName) {
 
-                if ( !/\/$/.test(output) ) {
-                    output += '/';
-                }
+                if (!grunt.file.exists(fileName)) {
+                    grunt.log.warn('Source file "' + fileName + '" not found.');
+                    return false;
+                } else {
 
-                //wrench.mkdirSyncRecursive( source );
-                grunt.log.writeln( '[grunt-smushit] Copying images from ' + source + ' to ' + output );
 
-                if( !exists( source ) ) {
-                    grunt.file.mkdir( source );
-                }
+                    if ( !_hasImageExtension( fileName ) ) {
 
-                wrench.copyDirSyncRecursive( source , output );
+                        var outputFiles = [], fullPath;
 
-                wrench.readdirSyncRecursive(output).filter(function (filename) {
-                    fullPath = output + filename;
-                    if(fs.statSync( fullPath ).isFile()) {
-                        outputFiles.push(fullPath);
+                        if ( !/\/$/.test(output) ) {
+                            output += '/';
+                        }
+
+                        grunt.log.writeln( '[grunt-smushit] Copying images from ' + fileName + ' to ' + output );
+
+
+                        if( !grunt.file.exists(output) ) {
+                            grunt.file.mkdir( output );
+                        }
+
+                        wrench.copyDirSyncRecursive( fileName , output );
+
+                        wrench.readdirSyncRecursive(output).filter(function (fileToSmush) {
+                            fullPath = output + fileToSmush;
+                            if(fs.statSync( fullPath ).isFile()) {
+                                outputFiles.push(fullPath);
+                            }
+                        });
+
+                        task.callSmushit( done , outputFiles );
+
+                    } else {
+
+                        var outputFile = output + path.basename(fileName),
+                            sourceFile = fileName;
+
+                        wrench.mkdirSyncRecursive( path.dirname(outputFile) );
+
+                        if(fileName !== outputFile) {
+                            task.callSmushit( done, sourceFile, outputFile );
+                        }
+
                     }
-                });
 
-                task.callSmushit( done , outputFiles );
-
-            } else {
-
-                var outputFile = '' , sourceFile = '';
-
-                files.forEach( function( fileName ) {
-
-                    outputFile = output + path.basename(fileName);
-                    sourceFile = fileName;
-
-                    wrench.mkdirSyncRecursive( path.dirname(outputFile) );
-
-                    if(fileName !== outputFile) {
-                        task.callSmushit( done, sourceFile, outputFile );
-                    }
-
-                });
-
-            }
+                }
+            });
 
         };
 
