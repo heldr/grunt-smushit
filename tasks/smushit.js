@@ -26,12 +26,14 @@ module.exports = function( grunt ) {
             task     = this,
             copyFile = grunt.file.copy,
             files    = [],
-            dest, source;
+            dest, source, service;
 
         this.files.forEach(function(f) {
 
             source = f.src;
             dest = f.dest;
+            service = f.service || undefined;
+            
         });
 
         if( dest && typeof source === 'string' && !_hasImageExtension( source ) ) {
@@ -46,6 +48,7 @@ module.exports = function( grunt ) {
         task.callSmushit = function( done, files, output ) {
 
             var smushit_settings = {
+                service: service,
                 recursive: true,
                 onItemComplete: function( response ) {
                     task.filesSmashed++;
