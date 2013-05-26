@@ -2,142 +2,49 @@
  * grunt-smushit
  * https://github.com/heldr/grunt-smushit
  *
- * Copyright (c) 2012 Helder Santana
- * http://heldr.com
- * MIT License
+ * Copyright (c) 2013 Helder Santana
+ * Licensed under the MIT license.
  */
 
-module.exports = function( grunt ) {
-    'use strict';
+'use strict';
 
-    function _hasImageExtension( str ) {
+module.exports = function(grunt) {
 
-        var pattern = /\.(png|gif|jp(e)?g)$/i;
-        return pattern.test( str );
+  // Please see the Grunt documentation for more information regarding task
+  // creation: http://gruntjs.com/creating-tasks
 
-    }
-
-    grunt.registerMultiTask( 'smushit', 'remove unnecessary bytes from image files', function() {
-        var smushit  = require( 'node-smushit' ),
-            wrench   = require('wrench'),
-            path     = require( 'path' ),
-            fs       = require('fs'),
-            logError = grunt.fail.fatal,
-            task     = this,
-            copyFile = grunt.file.copy,
-            files    = [],
-            dest, source, service;
-
-        this.files.forEach(function(f) {
-
-            source = f.src;
-            dest = f.dest;
-            service = f.service || undefined;
-            
-        });
-
-        if( dest && typeof source === 'string' && !_hasImageExtension( source ) ) {
-            files = wrench.readdirSyncRecursive(source).filter(function (filename) {
-                return fs.statSync(source + '/' +  filename).isFile();
-            });
-
-        } else {
-            files = grunt.file.expand(source);
-        }
-
-        task.callSmushit = function( done, files, output ) {
-
-            var smushit_settings = {
-                service: service,
-                recursive: true,
-                onItemComplete: function( response ) {
-                    task.filesSmashed++;
-                    if ( output ) {
-                        grunt.log.writeln( '[grunt-smushit] New optimized file: ' + output.blue );
-                    }
-                },
-                onComplete: function( response ) {
-                    if ( task.filesToSmash === task.filesSmashed ) {
-                        done( true );
-                    }
-                }
-            };
-
-            if (output) {
-                smushit_settings.output = output;
-            }
-
-            smushit.smushit( files , smushit_settings );
-
-        };
-
-
-        var targetPath = function( done, files, output ) {
-
-            if ( !/\/$/.test(output) ) {
-                output += '/';
-            }
-
-            source.forEach(function(fileName) {
-
-                if (!grunt.file.exists(fileName)) {
-                    grunt.log.warn('Source file "' + fileName + '" not found.');
-                    return false;
-                } else {
-
-
-                    if ( !_hasImageExtension( fileName ) ) {
-
-                        var outputFiles = [], fullPath;
-
-                        grunt.log.writeln( '[grunt-smushit] Copying images from ' + fileName + ' to ' + output );
-
-
-                        if( !grunt.file.exists(output) ) {
-                            grunt.file.mkdir( output );
-                        }
-
-                        wrench.copyDirSyncRecursive( fileName , output );
-
-                        wrench.readdirSyncRecursive(output).filter(function (fileToSmush) {
-                            fullPath = output + fileToSmush;
-                            if(fs.statSync( fullPath ).isFile()) {
-                                outputFiles.push(fullPath);
-                            }
-                        });
-
-                        task.callSmushit( done , outputFiles );
-
-                    } else {
-
-                        var outputFile = output + path.basename(fileName),
-                            sourceFile = fileName;
-
-                        wrench.mkdirSyncRecursive( path.dirname(outputFile) );
-
-                        if(fileName !== outputFile) {
-                            task.callSmushit( done, sourceFile, outputFile );
-                        }
-
-                    }
-
-                }
-            });
-
-        };
-
-        if( files.length ) {
-
-            var done = task.async(),
-                action;
-            task.filesToSmash = files.length;
-            task.filesSmashed = 0;
-
-            action = (dest) ? targetPath : task.callSmushit;
-            action( done , files , dest );
-
-        }
-
+  grunt.registerMultiTask('smushit', 'Your task description goes here.', function() {
+    // Merge task-specific and/or target-specific options with these defaults.
+    var options = this.options({
+      punctuation: '.',
+      separator: ', '
     });
+
+    // Iterate over all specified file groups.
+    this.files.forEach(function(f) {
+      // Concat specified files.
+      var src = f.src.filter(function(filepath) {
+        // Warn on and remove invalid source files (if nonull was set).
+        if (!grunt.file.exists(filepath)) {
+          grunt.log.warn('Source file "' + filepath + '" not found.');
+          return false;
+        } else {
+          return true;
+        }
+      }).map(function(filepath) {
+        // Read file source.
+        return grunt.file.read(filepath);
+      }).join(grunt.util.normalizelf(options.separator));
+
+      // Handle options.
+      src += options.punctuation;
+
+      // Write the destination file.
+      grunt.file.write(f.dest, src);
+
+      // Print a success message.
+      grunt.log.writeln('File "' + f.dest + '" created.');
+    });
+  });
 
 };

@@ -1,5 +1,3 @@
-node_modules/
-.DS_Store
-tests/img/img
-tests/img/min
-opt_img/
+node_modules
+npm-debug.log
+tmp
