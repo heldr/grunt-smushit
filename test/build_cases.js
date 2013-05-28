@@ -3,23 +3,21 @@
 module.exports = (function () {
 	var fs = require('fs'),
       wrench = require('wrench'),
-      tmp_path = 'tmp/',
-      source_path = 'fixtures/',
+      tmp_path = 'test/tmp/',
+      source_path = 'test/fixtures/',
       source_folder, target_folders;
 
   // clean tmp path if it exist
   if (fs.existsSync(tmp_path)) {
-    fs.rmdirSync(tmp_path);
+    wrench.rmdirSyncRecursive(tmp_path);
   }
   fs.mkdirSync(tmp_path);
 
-  // single file cases
-  target_folders = ['replace_single_dir'];
+  // replace file cases
+  target_folders = ['replace_single_dir','replace_single_filter','replace_multiple_filters','replace_single_file','replace_multiple_files'];
   source_folder = source_path + 'single';
   target_folders.forEach(function(folder) {
     folder = tmp_path + folder;
-    console.log(source_folder);
-    console.log(folder);
     wrench.copyDirSyncRecursive(source_folder, folder);
   });
 

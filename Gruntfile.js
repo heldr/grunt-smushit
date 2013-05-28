@@ -8,6 +8,8 @@
 
 'use strict';
 
+require('./test/build_cases');
+
 module.exports = function(grunt) {
 
   // Project configuration.
@@ -15,7 +17,7 @@ module.exports = function(grunt) {
     jshint: {
       all: [
         'Gruntfile.js',
-        'tasks/*.js',
+        'tasks/**/*.js',
         '<%= nodeunit.tests %>',
       ],
       options: {
@@ -23,15 +25,22 @@ module.exports = function(grunt) {
       },
     },
 
-    // Before generating any new files, remove any previously-created files.
-    clean: {
-      tests: ['test/tmp'],
-    },
-
     // Configuration to be run (and then tested).
     smushit: {
       replace_single_dir: {
         src: 'test/tmp/replace_single_dir'
+      },
+      replace_single_file: {
+        src: 'test/tmp/replace_single_file/dp.png'
+      },
+      replace_single_filter: {
+        src: ['test/tmp/replace_single_filter/**/*.png']
+      },
+      replace_multiple_filters: {
+        src: ['test/tmp/replace_multiple_filters/**/*.png','test/tmp/replace_multiple_filter/**/*.jpg']
+      },
+      replace_multiple_files: {
+        src: ['test/tmp/replace_multiple_files/dp.png','test/tmp/replace_multiple_filter/dp.jpg']
       }
     },
 
@@ -42,19 +51,13 @@ module.exports = function(grunt) {
 
   });
 
-  // Actually load this plugin's task(s).
   grunt.loadTasks('tasks');
 
-  // These plugins provide necessary tasks.
   grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-nodeunit');
 
-  // Whenever the "test" task is run, first clean the "tmp" dir, then run this
-  // plugin's task(s), then test the result.
-  grunt.registerTask('test', ['clean', 'smushit', 'jshint', 'nodeunit']);
+  grunt.registerTask('test', ['jshint', 'smushit', 'nodeunit']);
 
-  // By default, lint and run all tests.
   grunt.registerTask('default', ['jshint', 'test']);
 
 };

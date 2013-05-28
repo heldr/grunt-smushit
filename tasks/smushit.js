@@ -10,40 +10,37 @@
 
 module.exports = function(grunt) {
 
-  // Please see the Grunt documentation for more information regarding task
-  // creation: http://gruntjs.com/creating-tasks
+  var runner = require('./lib/runner');
 
-  grunt.registerMultiTask('smushit', 'Your task description goes here.', function() {
-    // Merge task-specific and/or target-specific options with these defaults.
-    var options = this.options({
-      punctuation: '.',
-      separator: ', '
-    });
+  grunt.registerMultiTask('smushit', 'A Grunt task to remove unnecessary bytes of PNG and JPG using Yahoo Smushit.', function() {
 
-    // Iterate over all specified file groups.
+    var task = this,
+        done = task.async(),
+        src,
+        srcLen,
+        target;
+
     this.files.forEach(function(f) {
-      // Concat specified files.
-      var src = f.src.filter(function(filepath) {
-        // Warn on and remove invalid source files (if nonull was set).
-        if (!grunt.file.exists(filepath)) {
-          grunt.log.warn('Source file "' + filepath + '" not found.');
-          return false;
-        } else {
-          return true;
-        }
-      }).map(function(filepath) {
-        // Read file source.
-        return grunt.file.read(filepath);
-      }).join(grunt.util.normalizelf(options.separator));
 
-      // Handle options.
-      src += options.punctuation;
+      if (f.orig.src.length) {
 
-      // Write the destination file.
-      grunt.file.write(f.dest, src);
+        src = f.src.filter(function(filepath) {
+          if (!grunt.file.exists(filepath)) {
+            grunt.log.warn('Path "' + filepath + '" not found.');
+            return false;
+          } else {
+            return true;
+          }
+        });
 
-      // Print a success message.
-      grunt.log.writeln('File "' + f.dest + '" created.');
+        runner({
+          files: src
+        }, done);
+
+      } else {
+        grunt.log.error('Source not found');
+      }
+
     });
   });
 
