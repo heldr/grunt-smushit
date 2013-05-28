@@ -24,25 +24,21 @@ var grunt = require('grunt');
 
 exports.smushit = {
   setUp: function(done) {
-    // setup here if necessary
+    require('./build_cases');
     done();
   },
-  default_options: function(test) {
+  replace_single_dir: function(test) {
     test.expect(1);
 
-    var actual = grunt.file.read('tmp/default_options');
-    var expected = grunt.file.read('test/expected/default_options');
-    test.equal(actual, expected, 'should describe what the default behavior is.');
+    var actual_png = grunt.file.read('test/tmp/replace_single_dir/dp.png');
+    var actual_jpg = grunt.file.read('test/tmp/replace_single_dir/dp.jpg');
+
+    var expected_png = grunt.file.read('test/expected/single/dp.png');
+    var expected_jpg = grunt.file.read('test/expected/single/dp.jpg');
+
+    test.equal(actual_png, expected_png, 'should run with a single directory and replace a png file');
+    test.equal(actual_jpg, expected_jpg, 'should run with a single directory and replace a png file');
 
     test.done();
-  },
-  custom_options: function(test) {
-    test.expect(1);
-
-    var actual = grunt.file.read('tmp/custom_options');
-    var expected = grunt.file.read('test/expected/custom_options');
-    test.equal(actual, expected, 'should describe what the custom option(s) behavior is.');
-
-    test.done();
-  },
+  }
 };

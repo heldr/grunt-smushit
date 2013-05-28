@@ -48,5 +48,9 @@
     "web performance",
     "webperf",
     "gruntplugin"
-  ]
+  ],
+  "dependencies": {
+    "node-smushit": "~0.5.1",
+    "wrench": "~1.5.1"
+  }
 }
