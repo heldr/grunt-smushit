@@ -23,7 +23,7 @@ var grunt = require('grunt'),
     test.ifError(value)
 */
 
-function getSize (file) {
+function getSize(file) {
   return fs.lstatSync(file).size;
 }
 
@@ -32,7 +32,7 @@ var PNG_FILE_NAME = 'dp.png',
     EXPECTED_PNG_SIZE = getSize('test/expected/single/' + PNG_FILE_NAME),
     EXPECTED_JPG_SIZE = getSize('test/expected/single/' + JPG_FILE_NAME);
 
-function testSingleFile (test, dir, msg) {
+function testSingleFile(test, dir, msg) {
   test.expect(1);
 
   var new_size = getSize('test/tmp/' + dir + '/' + PNG_FILE_NAME);
@@ -41,7 +41,7 @@ function testSingleFile (test, dir, msg) {
   test.done();
 }
 
-function testMultipleFiles (test, dir, png_msg, jpg_msg) {
+function testMultipleFiles(test, dir, png_msg, jpg_msg) {
   test.expect(2);
 
   var new_png_size = getSize('test/tmp/' + dir + '/' + PNG_FILE_NAME),
@@ -53,22 +53,22 @@ function testMultipleFiles (test, dir, png_msg, jpg_msg) {
 }
 
 exports.smushit = {
-  setUp: function(done) {
+  setUp: function (done) {
     done();
   },
-  replace_single_dir: function(test) {
+  replace_single_dir: function (test) {
     testMultipleFiles(test, 'replace_single_dir', 'should run with a single directory and replace a png file', 'should run with a single directory and replace a jpg file');
   },
-  replace_single_file: function(test) {
+  replace_single_file: function (test) {
     testSingleFile(test, 'replace_single_file', 'should replace a single png file');
   },
-  replace_single_filter: function(test) {
+  replace_single_filter: function (test) {
     testSingleFile(test, 'replace_single_filter', 'should run with png extension filter and replace a png file');
   },
-  replace_multiple_files: function(test) {
+  replace_multiple_files: function (test) {
     testMultipleFiles(test, 'replace_multiple_files', 'should run with multiple files and replace png files', 'should run with a multiple files and replace jpg files');
   },
-  replace_multiple_filters: function(test) {
+  replace_multiple_filters: function (test) {
     testMultipleFiles(test, 'replace_multiple_filters', 'should filter and replace png files', 'should filter and replace jpg files');
   }
 };
