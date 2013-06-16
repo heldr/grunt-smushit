@@ -1,4 +1,4 @@
-# grunt-smushit
+# grunt-smushit [![Build Status](https://secure.travis-ci.org/heldr/grunt-smushit.png)](http://travis-ci.org/heldr/grunt-smushit)
 
 A Grunt task to remove unnecessary bytes of PNG and JPG using Yahoo Smushit
 
