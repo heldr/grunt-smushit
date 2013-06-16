@@ -41,6 +41,30 @@ module.exports = function (grunt) {
       },
       replace_multiple_files: {
         src: ['test/tmp/replace_multiple_files/dp.png', 'test/tmp/replace_multiple_files/dp.jpg']
+      },
+      output_single_dir: {
+        src: 'test/fixtures/single',
+        dest: 'test/tmp/output_single_dir'
+      },
+      output_single_dir_with_sub: {
+        src: 'test/fixtures',
+        dest: 'test/tmp/output_single_dir_with_sub'
+      },
+      output_single_file: {
+        src: 'test/fixtures/single/dp.png',
+        dest: 'test/tmp/output_single_file'
+      },
+      output_single_filter: {
+        src: ['test/fixtures/single/**/*.png'],
+        dest: 'test/tmp/output_single_filter'
+      },
+      output_multiple_filters: {
+        src: ['test/fixtures/single/**/*.png', 'test/fixtures/single/**/*.jpg'],
+        dest: 'test/tmp/output_multiple_filters'
+      },
+      output_multiple_files: {
+        src: ['test/fixtures/single/dp.png', 'test/fixtures/single/dp.jpg'],
+        dest: 'test/tmp/output_multiple_files'
       }
     },
 

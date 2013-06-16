@@ -70,5 +70,23 @@ exports.smushit = {
   },
   replace_multiple_filters: function (test) {
     testMultipleFiles(test, 'replace_multiple_filters', 'should filter and replace png files', 'should filter and replace jpg files');
+  },
+  output_single_dir: function (test) {
+    testMultipleFiles(test, 'output_single_dir', 'should run with a single directory and move the optimized png file', 'should run with a single directory and move the optimized jpg file');
+  },
+  output_single_dir_with_sub: function (test) {
+    testMultipleFiles(test, 'output_single_dir_with_sub/single', 'should run with a single directory and move the optimized png file', 'should run with a single directory and move the optimized jpg file');
+  },
+  output_single_file: function (test) {
+    testSingleFile(test, 'output_single_file', 'should move the optimized png file');
+  },
+  output_single_filter: function (test) {
+    testSingleFile(test, 'output_single_filter', 'should run with png extension filter and move the optimized png file');
+  },
+  output_multiple_files: function (test) {
+    testMultipleFiles(test, 'output_multiple_files', 'should run with multiple files and move the optimized png files', 'should run with a multiple files and move the optimized jpg files');
+  },
+  output_multiple_filters: function (test) {
+    testMultipleFiles(test, 'output_multiple_filters', 'should filter and move the optimized png files', 'should filter and move the optimized jpg files');
   }
 };

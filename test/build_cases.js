@@ -14,7 +14,7 @@ module.exports = (function () {
   fs.mkdirSync(tmp_path);
 
   // replace file cases
-  target_folders = ['replace_single_dir','replace_single_filter','replace_multiple_filters','replace_single_file','replace_multiple_files'];
+  target_folders = ['replace_single_dir', 'replace_single_filter', 'replace_multiple_filters', 'replace_single_file', 'replace_multiple_files'];
   source_folder = source_path + 'single';
   target_folders.forEach(function(folder) {
     folder = tmp_path + folder;
