@@ -1,41 +1,87 @@
+/*
+ * grunt-smushit
+ * https://github.com/heldr/grunt-smushit
+ *
+ * Copyright (c) 2013 Helder Santana
+ * Licensed under the MIT license.
+ */
+
+'use strict';
+
+require('./test/build_cases');
+
 module.exports = function (grunt) {
-    'use strict';
 
-    grunt.initConfig({
-        smushit: {
-            output: {
-                src: ['tests/img/logo.png', 'tests/img/brand/logo.png'],
-                dest: 'tests/opt_img'
-            },
-            outputPath: {
-                src: 'tests/img',
-                dest: 'tests/opt_img'
-            },
-            specific: {
-                src: ['tests/img/logo.png']
-            },
-            single: {
-                src: 'tests/img/logo.png'
-            },
-            path: {
-                src: 'tests/img'
-            }
-        },
-        jshint: {
-            files: [
-                'Gruntfile.js',
-                'tasks/**/*.js'
-            ],
-            options: {
-                jshintrc: '.jshintrc'
-            }
-        }
-    });
+  // Project configuration.
+  grunt.initConfig({
+    jshint: {
+      all: [
+        'Gruntfile.js',
+        'tasks/**/*.js',
+        '<%= nodeunit.tests %>',
+      ],
+      options: {
+        jshintrc: '.jshintrc',
+      },
+    },
 
-    grunt.loadTasks('tasks');
-    // Load the plugin that provides the "uglify" task.
-    grunt.loadNpmTasks('grunt-contrib-jshint');
+    // Configuration to be run (and then tested).
+    smushit: {
+      replace_single_dir: {
+        src: 'test/tmp/replace_single_dir'
+      },
+      replace_single_file: {
+        src: 'test/tmp/replace_single_file/dp.png'
+      },
+      replace_single_filter: {
+        src: ['test/tmp/replace_single_filter/**/*.png']
+      },
+      replace_multiple_filters: {
+        src: ['test/tmp/replace_multiple_filters/**/*.png', 'test/tmp/replace_multiple_filters/**/*.jpg']
+      },
+      replace_multiple_files: {
+        src: ['test/tmp/replace_multiple_files/dp.png', 'test/tmp/replace_multiple_files/dp.jpg']
+      },
+      output_single_dir: {
+        src: 'test/fixtures/single',
+        dest: 'test/tmp/output_single_dir'
+      },
+      output_single_dir_with_sub: {
+        src: 'test/fixtures',
+        dest: 'test/tmp/output_single_dir_with_sub'
+      },
+      output_single_file: {
+        src: 'test/fixtures/single/dp.png',
+        dest: 'test/tmp/output_single_file'
+      },
+      output_single_filter: {
+        src: ['test/fixtures/single/**/*.png'],
+        dest: 'test/tmp/output_single_filter'
+      },
+      output_multiple_filters: {
+        src: ['test/fixtures/single/**/*.png', 'test/fixtures/single/**/*.jpg'],
+        dest: 'test/tmp/output_multiple_filters'
+      },
+      output_multiple_files: {
+        src: ['test/fixtures/single/dp.png', 'test/fixtures/single/dp.jpg'],
+        dest: 'test/tmp/output_multiple_files'
+      }
+    },
 
-    grunt.registerTask('default', ['jshint', 'smushit']);
+    // Unit tests.
+    nodeunit: {
+      tests: ['test/*_test.js'],
+    },
+
+  });
+
+  grunt.loadTasks('tasks');
+
+  grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-contrib-nodeunit');
+
+  grunt.registerTask('test', ['jshint', 'smushit', 'nodeunit']);
+
+  grunt.registerTask('default', ['jshint', 'test']);
 
 };

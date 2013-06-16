@@ -2,141 +2,63 @@
  * grunt-smushit
  * https://github.com/heldr/grunt-smushit
  *
- * Copyright (c) 2012 Helder Santana
- * http://heldr.com
- * MIT License
+ * Copyright (c) 2013 Helder Santana
+ * Licensed under the MIT license.
  */
 
+'use strict';
+
 module.exports = function (grunt) {
-    'use strict';
 
-    function _hasImageExtension(str) {
+  var path = require('path'),
+      runner = require('./lib/runner');
 
-        var pattern = /\.(png|gif|jp(e)?g)$/i;
-        return pattern.test(str);
+  grunt.registerMultiTask('smushit', 'A Grunt task to remove unnecessary bytes of PNG and JPG using Yahoo Smushit.', function () {
 
-    }
+    var task = this,
+        done = task.async(),
+        src, target, finalpath;
 
-    grunt.registerMultiTask('smushit', 'remove unnecessary bytes from image files', function () {
-        var smushit  = require('node-smushit'),
-            wrench   = require('wrench'),
-            path     = require('path'),
-            fs       = require('fs'),
-            logError = grunt.fail.fatal,
-            task     = this,
-            copyFile = grunt.file.copy,
-            files    = [],
-            dest, source, service;
+    this.files.forEach(function (f) {
 
-        this.files.forEach(function (f) {
-            source = f.src;
-            dest = f.dest;
-            service = f.service || undefined;
-        });
-
-        if (dest && typeof source === 'string' && !_hasImageExtension(source)) {
-            files = wrench.readdirSyncRecursive(source).filter(function (filename) {
-                return fs.statSync(source + '/' +  filename).isFile();
-            });
-
+      src = f.src.filter(function (filepath) {
+        if (!grunt.file.exists(filepath)) {
+          grunt.log.warn('Path "' + filepath + '" not found.');
+          return false;
         } else {
-            files = grunt.file.expand(source);
+          return true;
+        }
+      });
+
+      if (f.orig.dest) {
+
+        target = f.orig.dest;
+
+        if (!grunt.file.exists(target)) {
+          grunt.file.mkdir(target);
         }
 
-        task.callSmushit = function (done, files, output) {
-
-            var smushit_settings = {
-                service: service,
-                recursive: true,
-                onItemComplete: function (response) {
-                    task.filesSmashed++;
-                    if (output) {
-                        grunt.log.writeln('[grunt-smushit] New optimized file: ' + output.blue);
-                    }
-                },
-                onComplete: function (response) {
-                    if (task.filesToSmash === task.filesSmashed) {
-                        done(true);
-                    }
-                }
-            };
-
-            if (output) {
-                smushit_settings.output = output;
-            }
-
-            smushit.smushit(files, smushit_settings);
-
-        };
-
-
-        var targetPath = function (done, files, output) {
-
-            if (!/\/$/.test(output)) {
-                output += '/';
-            }
-
-            source.forEach(function (fileName) {
-
-                if (!grunt.file.exists(fileName)) {
-                    grunt.log.warn('Source file "' + fileName + '" not found.');
-                    return false;
-                } else {
-
-
-                    if (!_hasImageExtension(fileName)) {
-
-                        var outputFiles = [], fullPath;
-
-                        grunt.log.writeln('[grunt-smushit] Copying images from ' + fileName + ' to ' + output);
-
-
-                        if (!grunt.file.exists(output)) {
-                            grunt.file.mkdir(output);
-                        }
-
-                        wrench.copyDirSyncRecursive(fileName, output);
-
-                        wrench.readdirSyncRecursive(output).filter(function (fileToSmush) {
-                            fullPath = output + fileToSmush;
-                            if (fs.statSync(fullPath).isFile()) {
-                                outputFiles.push(fullPath);
-                            }
-                        });
-
-                        task.callSmushit(done, outputFiles);
-
-                    } else {
-
-                        var outputFile = output + path.basename(fileName),
-                            sourceFile = fileName;
-
-                        wrench.mkdirSyncRecursive(path.dirname(outputFile));
-
-                        if (fileName !== outputFile) {
-                            task.callSmushit(done, sourceFile, outputFile);
-                        }
-
-                    }
-
-                }
-            });
-
-        };
-
-        if (files.length) {
-
-            var done = task.async(),
-                action;
-
-            task.filesToSmash = files.length;
-            task.filesSmashed = 0;
-
-            action = (dest) ? targetPath : task.callSmushit;
-            action(done, files, dest);
-
+        if (f.orig.src.length === 1 && grunt.file.isDir(f.orig.src[0])) {
+          grunt.file.recurse(f.orig.src[0], function (abspath, rootdir, subdir, filename) {
+            finalpath = (subdir) ? target + '/' + subdir + '/' + filename : target + '/' + filename;
+            grunt.file.copy(abspath, finalpath);
+          });
+        } else {
+          src.forEach(function (filepath) {
+            finalpath = target + '/' + path.basename(filepath);
+            grunt.file.copy(filepath, finalpath);
+          });
         }
+
+      } else {
+        target = src;
+      }
+
+      runner(task.options({
+        files: target
+      }), done);
 
     });
+  });
 
 };
