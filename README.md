@@ -130,12 +130,11 @@ $ npm test
 NOTE: Be sure to keep up to date the plugin tests and jshint code quality.
 
 ## Release History
-  * 2013-00-00   v1.0.0   Rewrite task on top of [grunt-init-gruntplugin][grunt-init-gruntplugin]
+  * 2013-06-16   v1.0.0   Rewrite task on top of [grunt-init-gruntplugin][grunt-init-gruntplugin]
   * 2013-05-26   v0.4.2   Add support to different service #16
 
 ## Credits
   * [node-smushit][node-smushit]
-  * [wrench-js][wrench]
 
 ## License
 
@@ -143,6 +142,5 @@ MIT License
 (c) [Helder Santana](http://heldr.com)
 
 [node-smushit]: https://github.com/colorhook/node-smushit
-[wrench]: https://github.com/ryanmcgrath/wrench-js
 [smushit-site]: http://www.smushit.com/ysmush.it/
 [grunt-init-gruntplugin]: https://github.com/gruntjs/grunt-init-gruntplugin
