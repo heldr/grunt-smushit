@@ -22,24 +22,18 @@ module.exports = function (grunt) {
 
     this.files.forEach(function (f) {
 
-      if (f.orig.src.length) {
+      src = f.src.filter(function (filepath) {
+        if (!grunt.file.exists(filepath)) {
+          grunt.log.warn('Path "' + filepath + '" not found.');
+          return false;
+        } else {
+          return true;
+        }
+      });
 
-        src = f.src.filter(function (filepath) {
-          if (!grunt.file.exists(filepath)) {
-            grunt.log.warn('Path "' + filepath + '" not found.');
-            return false;
-          } else {
-            return true;
-          }
-        });
-
-        runner({
-          files: src
-        }, done);
-
-      } else {
-        grunt.log.error('Source not found');
-      }
+      runner({
+        files: src
+      }, done);
 
     });
   });

@@ -37,10 +37,10 @@ module.exports = function (grunt) {
         src: ['test/tmp/replace_single_filter/**/*.png']
       },
       replace_multiple_filters: {
-        src: ['test/tmp/replace_multiple_filters/**/*.png', 'test/tmp/replace_multiple_filter/**/*.jpg']
+        src: ['test/tmp/replace_multiple_filters/**/*.png', 'test/tmp/replace_multiple_filters/**/*.jpg']
       },
       replace_multiple_files: {
-        src: ['test/tmp/replace_multiple_files/dp.png', 'test/tmp/replace_multiple_filter/dp.jpg']
+        src: ['test/tmp/replace_multiple_files/dp.png', 'test/tmp/replace_multiple_files/dp.jpg']
       }
     },
 
