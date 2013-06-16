@@ -1,6 +1,6 @@
 # grunt-smushit [![Build Status](https://secure.travis-ci.org/heldr/grunt-smushit.png)](http://travis-ci.org/heldr/grunt-smushit)
 
-A Grunt task to remove unnecessary bytes of PNG and JPG using Yahoo Smushit
+Grunt plugin to remove unnecessary bytes of PNG and JPG using Yahoo Smushit
 
 > Smush.it uses optimization techniques specific to image format to remove unnecessary bytes from image files. It is a "lossless" tool, which means it optimizes the images without changing their look or visual quality.
 

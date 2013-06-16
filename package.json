@@ -1,7 +1,7 @@
 {
   "name": "grunt-smushit",
-  "description": "Grunt task to remove unnecessary bytes of PNG and JPG using Yahoo Smushit",
-  "version": "1.0.0",
+  "description": "Grunt plugin to remove unnecessary bytes of PNG and JPG using Yahoo Smushit",
+  "version": "1.0.1",
   "homepage": "https://github.com/heldr/grunt-smushit",
   "author": {
     "name": "Helder Santana",
