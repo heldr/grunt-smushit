@@ -1,6 +1,6 @@
 {
   "name": "grunt-smushit",
-  "description": "A Grunt task to remove unnecessary bytes of PNG and JPG using Yahoo Smushit",
+  "description": "Grunt task to remove unnecessary bytes of PNG and JPG using Yahoo Smushit",
   "version": "1.0.0",
   "homepage": "https://github.com/heldr/grunt-smushit",
   "author": {

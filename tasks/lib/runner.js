@@ -10,8 +10,8 @@ module.exports = function (options, done) {
     }
   };
 
-  if (options.output) {
-    smushit_settings.output = options.output;
+  if (options.service) {
+    smushit_settings.service = options.service;
   }
 
   smushit.smushit(options.files, smushit_settings);

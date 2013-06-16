@@ -54,9 +54,9 @@ module.exports = function (grunt) {
         target = src;
       }
 
-      runner({
+      runner(task.options({
         files: target
-      }, done);
+      }), done);
 
     });
   });
