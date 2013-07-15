@@ -167,16 +167,16 @@ grunt.initConfig({
 
     // src folder is 'tests/img' and dest is 'tests/opt_img'
     group1: {
-		  cwd: 'tests'
-			expand: true,
+      cwd: 'tests'
+      expand: true,
       src: 'img',
       dest: 'opt_img'
     },
 
     // multiple src folders: src folder is ['tests/img1', 'tests/img2'] and dest is 'tests/img/min'
     group2: {
-		  cwd: 'tests'
-			expand: true,
+      cwd: 'tests'
+      expand: true,
       src: ['img1/**/*.png','img2/**/*.jpg'],
       dest: 'img/min'
     },
