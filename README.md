@@ -213,7 +213,8 @@ $ npm test
 NOTE: Be sure to keep up to date the plugin tests and jshint code quality.
 
 ## Release History
-  * 2013-07-15   v1.1.0   Support nested folder structure, support for multiple source folders, and enable the use of cwd parameter
+  * 2013-07-15   v1.1.0   Support nested folder structure, support for multiple source folders
+  * 2013-07-15   v1.1.0   Enable the use of cwd parameter
   * 2013-06-16   v1.0.0   Rewrite task on top of [grunt-init-gruntplugin][grunt-init-gruntplugin]
   * 2013-05-26   v0.4.2   Add support to different service #16
 
