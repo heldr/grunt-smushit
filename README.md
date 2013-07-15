@@ -121,7 +121,7 @@ grunt.initConfig({
       dest: 'tests/opt_img'
     },
 
-		// retrieve files in a nested folder by file name
+    // retrieve files in a nested folder by file name
     group3: {
       src: ['tests/nested/img/**/southpark.png','tests/nested/img/**/southpark.jpg'],
       dest: 'tests/opt_img'
@@ -149,7 +149,7 @@ grunt.initConfig({
       dest: 'tests/opt_img'
     },
 
-		// retrieve files in a folder by file name
+    // retrieve files in a folder by file name
     group3: {
       src: ['tests/img1/**/southpark.png','tests/img2/**/southpark.jpg'],
       dest: 'tests/opt_img'
@@ -167,16 +167,16 @@ grunt.initConfig({
 
     // src folder is 'tests/img' and dest is 'tests/opt_img'
     group1: {
-		  cwd: 'tests'
-			expand: true,
+      cwd: 'tests'
+      expand: true,
       src: 'img',
       dest: 'opt_img'
     },
 
     // multiple src folders: src folder is ['tests/img1', 'tests/img2'] and dest is 'tests/img/min'
     group2: {
-		  cwd: 'tests'
-			expand: true,
+      cwd: 'tests'
+      expand: true,
       src: ['img1/**/*.png','img2/**/*.jpg'],
       dest: 'img/min'
     },
