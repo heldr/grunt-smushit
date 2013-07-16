@@ -102,6 +102,89 @@ grunt.initConfig({
 });
 ```
 
+#### Work with a nested folder
+Recursively walk into folders and smushit files
+
+```js
+grunt.initConfig({
+  smushit: {
+
+    // catch all files from a nested folder
+    group1: {
+      src: 'tests/nested/img',
+      dest: 'tests/opt_img'
+    },
+
+    // filter files in a nested folder by filetype
+    group2: {
+      src: ['tests/nested/img/**/*.png','tests/nested/img/**/*.jpg'],
+      dest: 'tests/opt_img'
+    },
+
+    // retrieve files in a nested folder by file name
+    group3: {
+      src: ['tests/nested/img/**/southpark.png','tests/nested/img/**/southpark.jpg'],
+      dest: 'tests/opt_img'
+    },
+  }
+});
+```
+
+#### Provide multiple source
+Smushit one folder, or many of them
+
+```js
+grunt.initConfig({
+  smushit: {
+
+    // catch all files from a nested folder
+    group1: {
+      src: ['tests/img1', 'tests/img2'],
+      dest: 'tests/opt_img'
+    },
+
+    // filter files in a folder by filetype
+    group2: {
+      src: ['tests/img1/**/*.png','tests/img2/**/*.jpg'],
+      dest: 'tests/opt_img'
+    },
+
+    // retrieve files in a folder by file name
+    group3: {
+      src: ['tests/img1/**/southpark.png','tests/img2/**/southpark.jpg'],
+      dest: 'tests/opt_img'
+    },
+  }
+});
+```
+
+#### Use of cwd
+Provide your base directory
+
+```js
+grunt.initConfig({
+  smushit: {
+
+    // src folder is 'tests/img' and dest is 'tests/opt_img'
+    group1: {
+      cwd: 'tests'
+      expand: true,
+      src: 'img',
+      dest: 'opt_img'
+    },
+
+    // multiple src folders: src folder is ['tests/img1', 'tests/img2'] and dest is 'tests/img/min'
+    group2: {
+      cwd: 'tests'
+      expand: true,
+      src: ['img1/**/*.png','img2/**/*.jpg'],
+      dest: 'img/min'
+    },
+  }
+});
+```
+
+
 #### Your own service
 There is an option that you can set your own image optimizer service. Its a good alternative if you don't want to wait for smush.it web service latency.
 
@@ -130,6 +213,8 @@ $ npm test
 NOTE: Be sure to keep up to date the plugin tests and jshint code quality.
 
 ## Release History
+  * 2013-07-15   v1.1.0   Support nested folder structure, support for multiple source folders
+  * 2013-07-15   v1.1.0   Enable the use of cwd parameter
   * 2013-06-16   v1.0.0   Rewrite task on top of [grunt-init-gruntplugin][grunt-init-gruntplugin]
   * 2013-05-26   v0.4.2   Add support to different service #16
 

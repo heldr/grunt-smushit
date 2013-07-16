@@ -65,7 +65,93 @@ module.exports = function (grunt) {
       output_multiple_files: {
         src: ['test/fixtures/single/dp.png', 'test/fixtures/single/dp.jpg'],
         dest: 'test/tmp/output_multiple_files'
-      }
+      },
+			output_single_dir_with_cwd: {
+				cwd: 'test',
+				expand: true,
+        src: 'fixtures/single',
+        dest: 'tmp/output_single_dir_with_cwd'
+      },
+      output_single_dir_with_sub_with_cwd: {
+        cwd: 'test',
+				expand: true,
+        src: 'fixtures/single',
+        dest: 'tmp/output_single_dir_with_sub_with_cwd'
+      },
+      output_single_file_with_cwd: {
+        cwd: 'test',
+				expand: true,
+        src: 'fixtures/single/dp.png',
+        dest: 'tmp/output_single_file_with_cwd'
+      },
+      output_single_filter_with_cwd: {
+        cwd: 'test',
+				expand: true,
+        src: ['fixtures/single/**/*.png'],
+        dest: 'tmp/output_single_filter_with_cwd'
+      },
+      output_multiple_filters_with_cwd: {
+        cwd: 'test',
+				expand: true,
+        src: ['fixtures/single/**/*.png', 'fixtures/single/**/*.jpg'],
+        dest: 'tmp/output_multiple_filters_with_cwd'
+      },
+      output_multiple_files_with_cwd: {
+        cwd: 'test',
+				expand: true,
+        src: ['fixtures/single/dp.png', 'fixtures/single/dp.jpg'],
+        dest: 'tmp/output_multiple_files_with_cwd'
+      },
+			output_single_nested_dir: {
+				src: ['test/fixtures/nested1'],
+				dest: 'test/tmp/output_single_nested_dir'
+			},
+			output_single_nested_dir_ending_with_slash: {
+				src: ['test/fixtures/nested1/'],
+				dest: 'test/tmp/output_single_nested_dir_ending_with_slash'
+			},
+			output_single_nested_dir_with_filter: {
+				src: ['test/fixtures/nested1/**/*.png'],
+				dest: 'test/tmp/output_single_nested_dir_with_filter'
+			},
+			output_multiple_nested_dir: {
+				src: ['test/fixtures/nested1', 'test/fixtures/nested2'],
+				dest: 'test/tmp/output_multiple_nested_dir'
+			},
+			output_multiple_nested_dir_with_filter: {
+				src: ['test/fixtures/nested1/**/*.png', 'test/fixtures/nested2/**/*.jpg'],
+				dest: 'test/tmp/output_multiple_nested_dir_with_filter'
+			},
+			output_single_nested_dir_with_cwd: {
+				cwd: 'test',
+				expand: true,
+        src: ['fixtures/nested1'],
+				dest: 'tmp/output_single_nested_dir_with_cwd'
+			},
+			output_single_nested_dir_ending_with_slash_with_cwd: {
+				cwd: 'test',
+				expand: true,
+        src: ['fixtures/nested1/'],
+				dest: 'tmp/output_single_nested_dir_ending_with_slash_with_cwd'
+			},
+			output_single_nested_dir_with_filter_with_cwd: {
+				cwd: 'test',
+				expand: true,
+        src: ['fixtures/nested1/**/*.png'],
+				dest: 'tmp/output_single_nested_dir_with_filter_with_cwd'
+			},
+			output_multiple_nested_dir_with_cwd: {
+				cwd: 'test',
+				expand: true,
+        src: ['fixtures/nested1', 'fixtures/nested2'],
+				dest: 'tmp/output_multiple_nested_dir_with_cwd'
+			},
+			output_multiple_nested_dir_with_filter_with_cwd: {
+				cwd: 'test',
+				expand: true,
+        src: ['fixtures/nested1/**/*.png', 'fixtures/nested2/**/*.jpg'],
+				dest: 'tmp/output_multiple_nested_dir_with_filter_with_cwd'
+			}
     },
 
     // Unit tests.
