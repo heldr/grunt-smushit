@@ -158,13 +158,22 @@ module.exports = function (grunt) {
     nodeunit: {
       tests: ['test/*_test.js'],
     },
-
+    // create version tag e push it
+    release: {
+      options: {
+	npm: false,
+	tagName: 'v<%= version %>',
+	commitMessage: 'bump version <%= version %>',
+	tagMessage: 'create tag v<%= version %>'
+      }
+    } 
   });
 
   grunt.loadTasks('tasks');
 
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-nodeunit');
+  grunt.loadNpmTasks('grunt-release');
 
   grunt.registerTask('test', ['jshint', 'smushit', 'nodeunit']);
 
