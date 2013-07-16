@@ -159,7 +159,7 @@ module.exports = function (grunt) {
       tests: ['test/*_test.js'],
     },
 
-    // create version tag e push it
+    // create version tag and push it
     release: {
       options: {
         npm: false,
