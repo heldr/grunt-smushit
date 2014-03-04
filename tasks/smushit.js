@@ -24,21 +24,21 @@ module.exports = function (grunt) {
       grunt.fail.fatal('No src or invalid src provided.');
       return;
     }
-        
+
     var task = this,
         done = task.async(),
         src = this.files[0].orig.src,
         dest = this.files[0].orig.dest,
         cwd = this.files[0].orig.cwd,
         target, finalpath;
-        
+
     if (dest) { // if we have dest param, copy everything from source to dest
-      target = (cwd) ? cwd + '/' + dest : dest;
-            
+      target = dest;
+
       if (!grunt.file.exists(target)) {
         grunt.file.mkdir(target);
       }
-            
+
       src.forEach(function (source) {
 
         source = (cwd) ? cwd + '/' + source : source;       // if cwd is provided, add cwd into the source path so we can expand
@@ -86,14 +86,14 @@ module.exports = function (grunt) {
           }
         });
       });
-            
+
       target = src;
     }
 
     var options = task.options({
       files: target
     });
-        
+
     runner(options, done);
   });
 

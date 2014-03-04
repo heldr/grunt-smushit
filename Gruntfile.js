@@ -70,37 +70,37 @@ module.exports = function (grunt) {
 				cwd: 'test',
 				expand: true,
         src: 'fixtures/single',
-        dest: 'tmp/output_single_dir_with_cwd'
+        dest: 'test/tmp/output_single_dir_with_cwd'
       },
       output_single_dir_with_sub_with_cwd: {
         cwd: 'test',
 				expand: true,
         src: 'fixtures/single',
-        dest: 'tmp/output_single_dir_with_sub_with_cwd'
+        dest: 'test/tmp/output_single_dir_with_sub_with_cwd'
       },
       output_single_file_with_cwd: {
         cwd: 'test',
 				expand: true,
         src: 'fixtures/single/dp.png',
-        dest: 'tmp/output_single_file_with_cwd'
+        dest: 'test/tmp/output_single_file_with_cwd'
       },
       output_single_filter_with_cwd: {
         cwd: 'test',
 				expand: true,
         src: ['fixtures/single/**/*.png'],
-        dest: 'tmp/output_single_filter_with_cwd'
+        dest: 'test/tmp/output_single_filter_with_cwd'
       },
       output_multiple_filters_with_cwd: {
         cwd: 'test',
 				expand: true,
         src: ['fixtures/single/**/*.png', 'fixtures/single/**/*.jpg'],
-        dest: 'tmp/output_multiple_filters_with_cwd'
+        dest: 'test/tmp/output_multiple_filters_with_cwd'
       },
       output_multiple_files_with_cwd: {
         cwd: 'test',
 				expand: true,
         src: ['fixtures/single/dp.png', 'fixtures/single/dp.jpg'],
-        dest: 'tmp/output_multiple_files_with_cwd'
+        dest: 'test/tmp/output_multiple_files_with_cwd'
       },
 			output_single_nested_dir: {
 				src: ['test/fixtures/nested1'],
@@ -126,31 +126,31 @@ module.exports = function (grunt) {
 				cwd: 'test',
 				expand: true,
         src: ['fixtures/nested1'],
-				dest: 'tmp/output_single_nested_dir_with_cwd'
+				dest: 'test/tmp/output_single_nested_dir_with_cwd'
 			},
 			output_single_nested_dir_ending_with_slash_with_cwd: {
 				cwd: 'test',
 				expand: true,
         src: ['fixtures/nested1/'],
-				dest: 'tmp/output_single_nested_dir_ending_with_slash_with_cwd'
+				dest: 'test/tmp/output_single_nested_dir_ending_with_slash_with_cwd'
 			},
 			output_single_nested_dir_with_filter_with_cwd: {
 				cwd: 'test',
 				expand: true,
         src: ['fixtures/nested1/**/*.png'],
-				dest: 'tmp/output_single_nested_dir_with_filter_with_cwd'
+				dest: 'test/tmp/output_single_nested_dir_with_filter_with_cwd'
 			},
 			output_multiple_nested_dir_with_cwd: {
 				cwd: 'test',
 				expand: true,
         src: ['fixtures/nested1', 'fixtures/nested2'],
-				dest: 'tmp/output_multiple_nested_dir_with_cwd'
+				dest: 'test/tmp/output_multiple_nested_dir_with_cwd'
 			},
 			output_multiple_nested_dir_with_filter_with_cwd: {
 				cwd: 'test',
 				expand: true,
         src: ['fixtures/nested1/**/*.png', 'fixtures/nested2/**/*.jpg'],
-				dest: 'tmp/output_multiple_nested_dir_with_filter_with_cwd'
+				dest: 'test/tmp/output_multiple_nested_dir_with_filter_with_cwd'
 			}
     },
 

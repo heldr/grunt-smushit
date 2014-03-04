@@ -64,7 +64,7 @@ function testFileNotExists(test, dirs, png_msg, jpg_msg) {
 			test.equal(false, jpg_exists, jpg_msg);
 		}
 	});
-  
+
   test.done();
 }
 
@@ -82,7 +82,7 @@ function testFileNotDownsized(test, dirs, png_msg, jpg_msg) {
 			test.notDeepEqual(new_jpg_size, EXPECTED_JPG_SIZE, jpg_msg);
 		}
 	});
-	
+
   test.done();
 }
 
@@ -100,7 +100,7 @@ function testMultipleFiles(test, dir, png_msg, jpg_msg) {
 function testNestedDir(test, dirs, png_msg, jpg_msg) {
 	dirs = ensureIsAnArray(dirs);
   test.expect((((png_msg !== '') ? 1 : 0) + ((jpg_msg !== '') ? 1 : 0)) * dirs.length);
-	
+
 	dirs.forEach(function (dir) {
 		if (png_msg !== '') {
 			var new_png_size = getSize('test/tmp/' + dir + '/' + PNG_FILE_NAME);
@@ -163,7 +163,7 @@ exports.smushit = {
   output_multiple_files: function (test) {
     testMultipleFiles(test, 'output_multiple_files', 'should run with multiple files and move the optimized png files', 'should run with a multiple files and move the optimized jpg files');
   },
-	output_single_dir_with_cwd: function (test) {
+  output_single_dir_with_cwd: function (test) {
     testMultipleFiles(test, 'output_single_dir_with_cwd', 'should run with a single directory and move the optimized png file provided with cwd', 'should run with a single directory and move the optimized jpg file provided with cwd');
   },
   output_single_dir_with_sub_with_cwd: function (test) {
