@@ -170,7 +170,7 @@ grunt.initConfig({
       cwd: 'tests'
       expand: true,
       src: 'img',
-      dest: 'opt_img'
+      dest: 'tests/opt_img'
     },
 
     // multiple src folders: src folder is ['tests/img1', 'tests/img2'] and dest is 'tests/img/min'
@@ -178,7 +178,7 @@ grunt.initConfig({
       cwd: 'tests'
       expand: true,
       src: ['img1/**/*.png','img2/**/*.jpg'],
-      dest: 'img/min'
+      dest: 'tests/img/min'
     },
   }
 });
@@ -213,6 +213,7 @@ $ npm test
 NOTE: Be sure to keep up to date the plugin tests and jshint code quality.
 
 ## Release History
+  * 2013-07-15   v1.2.0   Use cwd only for source files, following the [grunt pattern][grunt-cwd-pattern]
   * 2013-07-15   v1.1.0   Support nested folder structure, support for multiple source folders
   * 2013-07-15   v1.1.0   Enable the use of cwd parameter
   * 2013-06-16   v1.0.0   Rewrite task on top of [grunt-init-gruntplugin][grunt-init-gruntplugin]
@@ -229,3 +230,4 @@ MIT License
 [node-smushit]: https://github.com/colorhook/node-smushit
 [smushit-site]: http://www.smushit.com/ysmush.it/
 [grunt-init-gruntplugin]: https://github.com/gruntjs/grunt-init-gruntplugin
+[grunt-cwd-pattern]: http://gruntjs.com/configuring-tasks#building-the-files-object-dynamically
