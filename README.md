@@ -213,6 +213,7 @@ $ npm test
 NOTE: Be sure to keep up to date the plugin tests and jshint code quality.
 
 ## Release History
+  * 2014-03-30   v1.2.1   Bugfix. Fixes [issue 29](https://github.com/heldr/grunt-smushit/issues/29).
   * 2014-03-03   v1.2.0   Use cwd only for source files, following the [grunt pattern][grunt-cwd-pattern]
   * 2013-07-15   v1.1.0   Support nested folder structure, support for multiple source folders
   * 2013-07-15   v1.1.0   Enable the use of cwd parameter
