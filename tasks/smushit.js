@@ -15,7 +15,7 @@ module.exports = function (grunt) {
 
   function getSubPath(fileDir, filepath) {
     fileDir = path.normalize(fileDir.replace(/\/(\*\*\/|\*)[\w\W]*[\/]?$/, "") + '/');      // regex: remove **/... or *... if it's a dir needed to be expanded
-    return filepath.substring(fileDir.length);
+    return path.normalize(filepath).substring(fileDir.length);
   }
 
   grunt.registerMultiTask('smushit', 'A Grunt task to remove unnecessary bytes of PNG and JPG using Yahoo Smushit.', function () {
