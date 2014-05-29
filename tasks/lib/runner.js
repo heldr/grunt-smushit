@@ -1,19 +1,16 @@
-'use strict';
+module.exports = function (target, done) {
+    'use strict';
 
-module.exports = function (options, done) {
+    var smushit = require('node-smushit'),
+        smushit_settings = this.options({
+            onComplete: function (response) {
+                done(true);
+            }
+        });
 
-	var smushit = require('node-smushit'),
-  smushit_settings = {
-    recursive: true,
-    onComplete: function (response) {
-      done(true);
+    if (!smushit_settings.recursive) {
+        smushit_settings.recursive = true;
     }
-  };
 
-  if (options.service) {
-    smushit_settings.service = options.service;
-  }
-
-  smushit.smushit(options.files, smushit_settings);
-
+    smushit.smushit(target, smushit_settings);
 };

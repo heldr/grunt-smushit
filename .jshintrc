@@ -11,7 +11,7 @@
   "eqnull": true,
   "node": true,
   "white": true,
-  "indent": 2,
+  "indent": 4,
   "strict": true,
   "trailing": true
 }
