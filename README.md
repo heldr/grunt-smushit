@@ -6,6 +6,8 @@ Grunt plugin to remove unnecessary bytes of PNG and JPG using Yahoo Smushit
 
 [Read more about Smush.it][smushit-site]
 
+Prefer Gulp? [gulp-smushit](https://github.com/heldr/gulp-smushit)
+
 ## Getting Started
 This plugin requires Grunt `0.4.x`
 
