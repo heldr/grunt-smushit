@@ -5,7 +5,8 @@ module.exports = function (target, done) {
         smushit_settings = this.options({
             onComplete: function (response) {
                 done(true);
-            }
+            },
+            service: 'http://www.resmush.it/ws.php'
         });
 
     if (!smushit_settings.recursive) {

@@ -1,10 +1,10 @@
 # grunt-smushit [![Build Status](https://secure.travis-ci.org/heldr/grunt-smushit.svg)](http://travis-ci.org/heldr/grunt-smushit)
 
-Grunt plugin to remove unnecessary bytes of PNG and JPG using Yahoo Smushit
+Grunt plugin to remove unnecessary bytes of PNG and JPG using reSmush.it
 
-> Smush.it uses optimization techniques specific to image format to remove unnecessary bytes from image files. It is a "lossless" tool, which means it optimizes the images without changing their look or visual quality.
+> reSmush.it is a FREE alternative to Yahoo Smush.it (deprecated on March 2015). This tool provides a online way to optimize pictures size via a documented webservice.
 
-[Read more about Smush.it][smushit-site]
+[Read more about reSmush.it](http://resmush.it/)
 
 Prefer Gulp? [gulp-smushit](https://github.com/heldr/gulp-smushit)
 
@@ -219,6 +219,7 @@ $ npm test
 NOTE: Be sure to keep up to date the plugin tests and jshint code quality.
 
 ## Release History
+  * 2015-09-05   v2.0.0   Use resmush.it due Yahoo Smushit deprecation
   * 2014-05-19   v1.3.0   Pass node-smushit options through grunt file
   * 2014-03-30   v1.2.1   Bugfix. Fixes [issue 29](https://github.com/heldr/grunt-smushit/issues/29)
   * 2014-03-03   v1.2.0   Use cwd only for source files, following the [grunt pattern][grunt-cwd-pattern]
@@ -236,6 +237,5 @@ MIT License
 (c) [Helder Santana](http://heldr.com)
 
 [node-smushit]: https://github.com/colorhook/node-smushit
-[smushit-site]: http://www.smushit.com/ysmush.it/
 [grunt-init-gruntplugin]: https://github.com/gruntjs/grunt-init-gruntplugin
 [grunt-cwd-pattern]: http://gruntjs.com/configuring-tasks#building-the-files-object-dynamically
