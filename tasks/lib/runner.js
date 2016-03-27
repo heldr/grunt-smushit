@@ -6,7 +6,7 @@ module.exports = function (target, done) {
             onComplete: function (response) {
                 done(true);
             },
-            service: 'http://www.resmush.it/ws.php'
+            service: 'http://api.resmush.it/ws.php'
         });
 
     if (!smushit_settings.recursive) {

@@ -8,8 +8,8 @@
 
 'use strict';
 
-var path = require('path'),
-    runner = require('./lib/runner');
+var path = require('path');
+var runner = require('./lib/runner');
 
 function getSubPath(fileDir, filepath) {
     fileDir = path.normalize(fileDir.replace(/\/(\*\*\/|\*)[\w\W]*[\/]?$/, "") + '/');      // regex: remove **/... or *... if it's a dir needed to be expanded
